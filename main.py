@@ -19,7 +19,7 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                merchant.choose_option()
+                merchant.choose_option(player)
 
         if pygame.Rect.colliderect(player.rect, merchant.rect):
                 merchant.menu_store(background)
@@ -28,10 +28,15 @@ def main():
 
         if event.type == pygame.KEYDOWN:
             player.move(event)
+            if player.has_weapon == True:
+                player.weapon.move(event)
+
 
         #display objects
         screen.blit(background, (0,0))
         merchant.blit_object()
+        if player.has_weapon == True:
+            player.weapon.blit_object()
         player.blit_object()
         pygame.display.flip()
 
