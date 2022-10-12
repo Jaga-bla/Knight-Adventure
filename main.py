@@ -1,6 +1,8 @@
 import pygame
 import sys
-from models import *
+from models.models import Background
+from models.merchant import *
+from models.player import *
 
 def main():
     #initialize screen
@@ -12,14 +14,14 @@ def main():
     background = Background(0,0,screen,'mainmap.png',(1000,600))
     player = Player(800,300, screen, 'player.png', (50,100))
     merchant = Merchant(900,320, screen, 'merchant.png', (50,100))
-
     while 1:
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                merchant.choose_option(player)
+                if pygame.Rect.colliderect(player.rect, merchant.rect):
+                    merchant.choose_option(player)
 
         if pygame.Rect.colliderect(player.rect, merchant.rect):
                 merchant.menu_store(background)
@@ -31,13 +33,12 @@ def main():
             if player.has_weapon == True:
                 player.weapon.move(event)
 
-
         #display objects
         screen.blit(background, (0,0))
         merchant.blit_object()
+        player.blit_object()
         if player.has_weapon == True:
             player.weapon.blit_object()
-        player.blit_object()
         pygame.display.flip()
 
 if __name__ == '__main__':
