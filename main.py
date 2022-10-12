@@ -1,6 +1,6 @@
 import pygame
 import sys
-from models.models import Background
+from models.background import *
 from models.merchant import *
 from models.player import *
 
@@ -10,10 +10,12 @@ def main():
     clock = pygame.time.Clock()
     size = width, height = 1000, 600
     screen = pygame.display.set_mode(size)
+
     #initialize screen objects
-    background = Background(0,0,screen,'mainmap.png',(1000,600))
+    background = Background(0,0,screen,'mainmap.gif',(1000,600))
     player = Player(800,300, screen, 'player.png', (50,100))
     merchant = Merchant(900,320, screen, 'merchant.png', (50,100))
+    fight_entrance = FightEntrance(0,0, screen, 'cave.png', (200,200))
     while 1:
         clock.tick(60)
         for event in pygame.event.get():
@@ -36,6 +38,7 @@ def main():
         #display objects
         screen.blit(background, (0,0))
         merchant.blit_object()
+        fight_entrance.blit_object()
         player.blit_object()
         if player.has_weapon == True:
             player.weapon.blit_object()

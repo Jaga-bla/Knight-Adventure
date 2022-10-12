@@ -1,5 +1,5 @@
 import pygame
-from .models import SurfaceObject
+from .models_interfaces import SurfaceObject
 
 class Weapon(SurfaceObject):
     def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):

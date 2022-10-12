@@ -1,5 +1,5 @@
 import pygame
-from .models import SurfaceObject
+from .models_interfaces import SurfaceObject
 
 class Merchant(SurfaceObject):
     def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
@@ -13,7 +13,7 @@ class Merchant(SurfaceObject):
 
     def menu_store(self, background):
         self.background = background
-        menu = Menu(self.background )
+        menu = Menu(self.background)
         self.option1 = menu.create_option(150, 'Buy sword')
         self.option2 = menu.create_option(220, 'Upgrade Sword')
         self.option3 = menu.create_option(290, 'Sell Sword')
