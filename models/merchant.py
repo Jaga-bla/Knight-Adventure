@@ -2,14 +2,6 @@ import pygame
 from .models_interfaces import SurfaceObject
 
 class Merchant(SurfaceObject):
-    def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
-        self.screen = screen
-        self.x = x
-        self.y = y
-        self.size = size
-        image1 = pygame.image.load(f"data/{name_of_image}")
-        self.image = pygame.transform.scale(image1, self.size)
-        self.rect = self.image.get_rect(center= (self.y, self.x))
 
     def menu_store(self, background):
         self.background = background
@@ -28,15 +20,24 @@ class Merchant(SurfaceObject):
                     player.init_weapon()
                     player.weapon.starting_power()
                 if option == self.option2:
-                    player.weapon.upgrade_weapon(5)
-                    player.upgrade_weapon()
-                    print('weapon power',player.weapon.power)
-                    print('player offence',player.offence)
+                    if player.has_weapon:
+                        player.weapon.upgrade_weapon(5)
+                        player.upgrade_weapon()
+                    else:
+                        print('you dont have weapon')
                 if option == self.option3:
                     player.sells_weapon()
                     
     def draw_rect(self):
         pygame.draw.rect(self.rect)
+    
+    def is_player_inside(self, player):
+        if pygame.Rect.colliderect(player.rect, self.rect):
+                self.menu_store(self.background)
+        else:
+            self.background = pygame.image.load('data/mainmap.png')
+    
+
 
 class Menu:
     def __init__(self, background):
@@ -51,5 +52,3 @@ class Menu:
         font = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), text, True, (220,200,200))
         self.background.blit(font,(400,vertical_position+20))
         return option
-    
-

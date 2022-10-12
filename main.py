@@ -12,7 +12,7 @@ def main():
     screen = pygame.display.set_mode(size)
 
     #initialize screen objects
-    background = Background(0,0,screen,'mainmap.gif',(1000,600))
+    background = Background(0,0,screen,'mainmap.png',(1000,600))
     player = Player(800,300, screen, 'player.png', (50,100))
     merchant = Merchant(900,320, screen, 'merchant.png', (50,100))
     fight_entrance = FightEntrance(0,0, screen, 'cave.png', (200,200))

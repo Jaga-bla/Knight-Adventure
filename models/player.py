@@ -35,6 +35,8 @@ class Player(SurfaceObject):
     def sells_weapon(self):
         self.has_weapon = False
         pygame.image.load('data/mainmap.png')
+        self.offence = 0
+        self.weapon.power = 0
 
     def init_weapon(self):
         self.weapon = Weapon(self.y+40, self.x-25, self.screen, 'sword.png', (50,100))
@@ -43,6 +45,9 @@ class Player(SurfaceObject):
 
     def upgrade_weapon(self):
         self.offence = self.weapon.power
+        print('weapon power', self.weapon.power)
+        print('player offence', self.offence)
+
 
     def draw_rect(self):
         pygame.draw.rect(self.rect)

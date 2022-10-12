@@ -1,4 +1,5 @@
 import pygame
+from .models_interfaces import SurfaceObject
 
-class Enemy:
+class Enemy(SurfaceObject):
     pass
