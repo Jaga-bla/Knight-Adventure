@@ -48,9 +48,5 @@ class Player(SurfaceObject):
         print('weapon power', self.weapon.power)
         print('player offence', self.offence)
 
-
-    def draw_rect(self):
-        pygame.draw.rect(self.rect)
-
     def __str__(self):
         return self.name
