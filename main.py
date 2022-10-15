@@ -20,6 +20,7 @@ def main():
     merchant = Merchant(900,320, screen, 'merchant.png', (50,100))
     fight_entrance = FightEntrance(0,0, screen, 'cave.png', (200,200))
     ready_to_fight = False
+    fight = Fight(player, screen)
 
     while 1:
         background.blit_object()
@@ -27,19 +28,16 @@ def main():
         fight_entrance.blit_object()
         player.blit_object()
         clock.tick(60)
-        for event in pygame.event.get():
+        list_of_events = pygame.event.get()
+        for event in list_of_events:
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.Rect.colliderect(player.rect, merchant.rect):
                     merchant.menu.choose_option(player)
                 if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
-                    ready_to_fight = fight_entrance.menu.choose_option()
-                    fight = Fight(player, screen)
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    print("y")
+                    fight_entrance.menu.choose_option()
+                    ready_to_fight = True
 
         if pygame.Rect.colliderect(player.rect, merchant.rect):
             merchant.create_menu()
@@ -49,8 +47,8 @@ def main():
             fight_entrance.create_menu()
 
         if ready_to_fight == True:
-            encounter(fight)
-
+            encounter(fight, event, list_of_events)
+ 
         if event.type == pygame.KEYDOWN:
             player.move(event)
             if player.has_weapon:

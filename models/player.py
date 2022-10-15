@@ -30,6 +30,13 @@ class Player(SurfaceObject):
             self.x += Movement_speed
             self.rect = self.image.get_rect(center= (self.y, self.x))
 
+    def attack(self, target):
+        target.health = target.health - (self.offence + self.weapon.power)
+
+    def is_alive(self):
+        if self.health >0:
+            return True
+
     def gets_weapon(self):
         self.has_weapon = True
 
