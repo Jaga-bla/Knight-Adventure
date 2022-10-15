@@ -18,3 +18,5 @@ class Weapon(SurfaceObject):
         return self.power
     def upgrade_weapon(self, power_added):
         self.power = self.power + power_added
+    def attack_animation(self):
+        pass

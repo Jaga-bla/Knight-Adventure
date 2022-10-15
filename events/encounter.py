@@ -1,4 +1,4 @@
 import pygame
 
 def fight():
-    pass
+    print('y')
