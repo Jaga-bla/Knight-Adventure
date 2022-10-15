@@ -36,15 +36,17 @@ class FightChoiceMenu(DrawMenu):
 
 
 class Fight:
-    
-    def __init__(self):
+    def __init__(self, player, screen):
+        self.player = player
+        self.screen = screen
+        self.enemy = Enemy(800,400,screen,'enemy.png',(50,100))
         image = pygame.image.load("data/fight_background.png")
         self.background = pygame.transform.scale(image, (1200, 600))
+        self.enemy = Enemy(500,300, self.screen, 'enemy.png', (50,100))
 
-    def custom_initialization(self):
-        self.enemy = Enemy(200,300, self.screen, 'player.png', (50,100))
-        image = pygame.image.load("data/fight_background.png")
-        self.background = pygame.transform.scale(image, (1200, 600))
-        self.screen.blit(self.background, (0,0 ))
+    def blit_objects(self):
+        self.screen.blit(self.background,(0,0))
         self.player.blit_object()
         self.enemy.blit_object()
+
+    
