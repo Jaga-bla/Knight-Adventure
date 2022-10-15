@@ -3,7 +3,8 @@ import sys
 from models.background import *
 from models.merchant import *
 from models.player import *
-from models.fight import Fight
+from models.fight import *
+
 
 def main():
     #initialize screen
@@ -30,21 +31,19 @@ def main():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.Rect.colliderect(player.rect, merchant.rect):
-                    merchant.choose_option(player)
+                    merchant.menu.choose_option(player)
                 if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
-                    fight.choose_option(player)
+                    fight_entrance.menu.choose_option()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     print("y")
 
         if pygame.Rect.colliderect(player.rect, merchant.rect):
-            merchant.menu_store(screen)
+            merchant.create_menu()
 
 
         if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
-            fight.menu_store(screen)
-        if fight.want_fight == True:
-            fight.custom_initialization()
+            fight_entrance.create_menu()
 
         if event.type == pygame.KEYDOWN:
             player.move(event)

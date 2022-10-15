@@ -1,5 +1,5 @@
 import pygame
-from .models_interfaces import SurfaceObject
+from .__models_interfaces import SurfaceObject
 
 class Weapon(SurfaceObject):
 

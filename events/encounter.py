@@ -1,4 +1,3 @@
-import pygame
 from models.enemy import Enemy
 from models.fight import Fight
 
