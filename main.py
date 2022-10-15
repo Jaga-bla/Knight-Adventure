@@ -4,6 +4,7 @@ from models.background import *
 from models.merchant import *
 from models.player import *
 from models.fight import *
+from events import encounter
 
 
 def main():
@@ -18,7 +19,7 @@ def main():
     player = Player(800,300, screen, 'player.png', (50,100))
     merchant = Merchant(900,320, screen, 'merchant.png', (50,100))
     fight_entrance = FightEntrance(0,0, screen, 'cave.png', (200,200))
-    fight = Fight()
+    ready_to_fight = False
 
     while 1:
         background.blit_object()
@@ -33,7 +34,7 @@ def main():
                 if pygame.Rect.colliderect(player.rect, merchant.rect):
                     merchant.menu.choose_option(player)
                 if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
-                    fight_entrance.menu.choose_option()
+                    ready_to_fight = fight_entrance.menu.choose_option()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     print("y")
@@ -44,6 +45,9 @@ def main():
 
         if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
             fight_entrance.create_menu()
+
+        if ready_to_fight == True:
+            encounter(player, screen, event)
 
         if event.type == pygame.KEYDOWN:
             player.move(event)

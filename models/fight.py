@@ -29,7 +29,8 @@ class FightChoiceMenu(DrawMenu):
         for option in self.list_of_options:
             if pygame.Rect.collidepoint(option, pygame.mouse.get_pos()):
                 if option == self.answer_yes:
-                    pass
+                    ready_to_fight = True
+                    return ready_to_fight
                 if option == self.answer_no:
                     pass
 
