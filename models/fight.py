@@ -32,7 +32,8 @@ class FightChoiceMenu(DrawMenu):
                     ready_to_fight = True
                     return ready_to_fight
                 if option == self.answer_no:
-                    pass
+                    ready_to_fight = False
+                    return ready_to_fight
 
 
 class Fight:

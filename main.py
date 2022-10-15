@@ -29,6 +29,7 @@ def main():
         player.blit_object()
         clock.tick(60)
         list_of_events = pygame.event.get()
+
         for event in list_of_events:
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -36,25 +37,28 @@ def main():
                 if pygame.Rect.colliderect(player.rect, merchant.rect):
                     merchant.menu.choose_option(player)
                 if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
-                    fight_entrance.menu.choose_option()
-                    ready_to_fight = True
+                    ready_to_fight = fight_entrance.menu.choose_option()
+                    fight = Fight(player, screen)
+                # else:
+                #     ready_to_fight = False
 
         if pygame.Rect.colliderect(player.rect, merchant.rect):
             merchant.create_menu()
-
 
         if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
             fight_entrance.create_menu()
 
         if ready_to_fight == True:
             encounter(fight, event, list_of_events)
- 
+            
         if event.type == pygame.KEYDOWN:
             player.move(event)
             if player.has_weapon:
                 player.weapon.move(event)
+
         if player.has_weapon == True:
             player.weapon.blit_object()
+
         pygame.display.flip()
 
 if __name__ == '__main__':
