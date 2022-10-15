@@ -15,7 +15,8 @@ class FightChoiceMenu(DrawMenu):
 
     def __init__(self, screen:pygame.Surface, heading:str):
         self.screen = screen
-        font = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), heading, True, (0,0,0))
+        self.heading = heading
+        font = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), self.heading, True, (0,0,0))
         pygame.draw.rect(screen, (0,0,0), (50,50, 800,400))
         pygame.draw.rect(screen, (200,200,200), (70,70, 760,360))
         self.screen.blit(font,(300,120))
@@ -42,7 +43,7 @@ class Fight:
         self.screen = screen
         self.enemy = Enemy(800,400,screen,'enemy.png',(50,100))
         image = pygame.image.load("data/fight_background.png")
-        self.background = pygame.transform.scale(image, (1200, 600))
+        self.background = pygame.transform.scale(image, (1000, 600))
         self.enemy = Enemy(500,300, self.screen, 'enemy.png', (50,100))
 
     def blit_objects(self):

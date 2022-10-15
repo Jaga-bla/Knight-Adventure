@@ -20,9 +20,9 @@ def main():
     merchant = Merchant(900,320, screen, 'merchant.png', (50,100))
     fight_entrance = FightEntrance(0,0, screen, 'cave.png', (200,200))
     ready_to_fight = False
-    fight = Fight(player, screen)
 
     while 1:
+        inventory = InventoryView(screen, 'Inventory', player)
         background.blit_object()
         merchant.blit_object()
         fight_entrance.blit_object()
@@ -39,8 +39,6 @@ def main():
                 if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
                     ready_to_fight = fight_entrance.menu.choose_option()
                     fight = Fight(player, screen)
-                # else:
-                #     ready_to_fight = False
 
         if pygame.Rect.colliderect(player.rect, merchant.rect):
             merchant.create_menu()
@@ -50,7 +48,7 @@ def main():
 
         if ready_to_fight == True:
             encounter(fight, event, list_of_events)
-            
+
         if event.type == pygame.KEYDOWN:
             player.move(event)
             if player.has_weapon:
