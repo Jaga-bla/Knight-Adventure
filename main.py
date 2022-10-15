@@ -3,7 +3,7 @@ import sys
 from models.background import *
 from models.merchant import *
 from models.player import *
-from events.encounter import *
+from models.fight import Fight
 
 def main():
     #initialize screen
@@ -17,7 +17,7 @@ def main():
     player = Player(800,300, screen, 'player.png', (50,100))
     merchant = Merchant(900,320, screen, 'merchant.png', (50,100))
     fight_entrance = FightEntrance(0,0, screen, 'cave.png', (200,200))
-    
+
     while 1:
         background.blit_object()
         merchant.blit_object()
@@ -38,7 +38,7 @@ def main():
                 merchant.menu_store(screen)
 
         if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
-            fight()
+            fight = Fight(player, screen)
 
         if event.type == pygame.KEYDOWN:
             player.move(event)
