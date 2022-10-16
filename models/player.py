@@ -10,7 +10,9 @@ class Player(SurfaceObject):
         self.y = y
         self.size = size
         self.offence = 0
+        self.wallet = 5
         self.health = 100
+        self.lvl = 1
         image1 = pygame.image.load(f"data/{name_of_image}")
         self.image = pygame.transform.scale(image1, self.size)
         self.rect = self.image.get_rect(center= (self.y, self.x))

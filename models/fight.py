@@ -1,6 +1,7 @@
 import pygame
 from .enemy import Enemy
 from .__models_interfaces import DrawMenu, SurfaceObject
+import random
 
 class FightEntrance(SurfaceObject):
     def create_menu(self):
@@ -45,10 +46,17 @@ class Fight:
         image = pygame.image.load("data/fight_background.png")
         self.background = pygame.transform.scale(image, (1000, 600))
         self.enemy = Enemy(500,300, self.screen, 'enemy.png', (50,100))
+        self.prize = True
 
     def blit_objects(self):
         self.screen.blit(self.background,(0,0))
         self.player.blit_object()
         self.enemy.blit_object()
 
+    def grant_prize(self):
+        if self.enemy.is_alive() == False:
+            if self.prize:
+                self.player.lvl +=1
+                self.player.wallet += random.randint(0,10)
+                self.prize = False
     

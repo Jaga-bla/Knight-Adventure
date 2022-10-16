@@ -14,10 +14,15 @@ class InventoryView(DrawMenu):
         font_heading = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), heading, True, (0,0,0))
         font_hp = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), f'HP: {player.health}/100', True, (0,0,0))
         font_off = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), f'Off: {player.offence}', True, (0,0,0))
+        font_wallet = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), f'Wallet: {player.wallet} berries', True, (0,0,0))
+        font_lvl = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), f'Lvl: {player.lvl}', True, (0,0,0))
         pygame.draw.rect(screen, (0,0,0), (1000,0, 300,600))
         pygame.draw.rect(screen, (200,200,200), (1020,20, 158,560))
         self.screen.blit(font_heading,(1060,20))
         self.screen.blit(font_hp,(1030,70))
         self.screen.blit(font_off,(1030,120))
+        self.screen.blit(font_wallet,(1030,170))
+        self.screen.blit(font_lvl,(1030,270))
+
 
 

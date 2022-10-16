@@ -33,6 +33,8 @@ def main():
         for event in list_of_events:
             if event.type == pygame.QUIT:
                 sys.exit()
+            if player.has_weapon:
+                player.weapon.attack_animation(event)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.Rect.colliderect(player.rect, merchant.rect) and player.is_fighting == False:
                     merchant.menu.choose_option(player)
@@ -57,10 +59,8 @@ def main():
             player.move(event)
             if player.has_weapon:
                 player.weapon.move(event, list_of_events, player)
-                player.weapon.attack_animation(event)
-
 
         pygame.display.flip()
 
 if __name__ == '__main__':
-    main()
+    main() 
