@@ -34,14 +34,14 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if pygame.Rect.colliderect(player.rect, merchant.rect):
+                if pygame.Rect.colliderect(player.rect, merchant.rect) and ready_to_fight == False:
                     merchant.menu.choose_option(player)
                 if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
                     ready_to_fight = fight_entrance.menu.choose_option()
                     fight = Fight(player, screen)
-
-        if pygame.Rect.colliderect(player.rect, merchant.rect):
-            merchant.create_menu()
+                    
+        if pygame.Rect.colliderect(player.rect, merchant.rect) and ready_to_fight == False:
+                merchant.create_menu()
 
         if pygame.Rect.colliderect(player.rect, fight_entrance.rect):
             fight_entrance.create_menu()
@@ -49,13 +49,13 @@ def main():
         if ready_to_fight == True:
             encounter(fight, event, list_of_events)
 
+        if player.has_weapon == True:
+            player.weapon.blit_object()
+
         if event.type == pygame.KEYDOWN:
             player.move(event)
             if player.has_weapon:
                 player.weapon.move(event)
-
-        if player.has_weapon == True:
-            player.weapon.blit_object()
 
         pygame.display.flip()
 
