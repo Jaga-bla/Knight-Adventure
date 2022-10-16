@@ -3,7 +3,7 @@ from .__models_interfaces import SurfaceObject,DrawMenu
 
 class Merchant(SurfaceObject):
     def create_menu(self):
-        self.menu = MerchantShop(self.screen,'Whant can I do for you, Mighty Knight?')
+        self.menu = MerchantShop(self.screen,'What can I do for you, Mighty Knight?')
     
 class MerchantShop(DrawMenu):
     def create_option(self, vertical_position:int, text:str):
@@ -40,7 +40,7 @@ class MerchantShop(DrawMenu):
                             player.weapon.upgrade_weapon(5)
                             player.upgrade_weapon()
                         else:
-                            print('you dont have weapon')
+                            self.__init__(self.screen, "You don't have a weapon")
                     else:
                         print('you dont have enough berries')
                 if option == self.option_sell:
