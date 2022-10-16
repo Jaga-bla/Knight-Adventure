@@ -17,7 +17,7 @@ def main():
     #initialize screen objects
     background = Background(0,0,screen,'mainmap.png',(1000,600))
     player = Player(800,300, screen, 'player.png', (50,100))
-    merchant = Merchant(900,320, screen, 'merchant.png', (50,100))
+    merchant = Merchant(900,400, screen, 'merchant.png', (50,100))
     fight_entrance = FightEntrance(0,0, screen, 'cave.png', (200,200))
     ready_to_fight = False
 
@@ -46,7 +46,7 @@ def main():
 
         if player.has_weapon == True:
             player.weapon.blit_object()
-
+        
         if pygame.Rect.colliderect(player.rect, merchant.rect) and player.is_fighting == False:
             merchant.create_menu()
 
@@ -56,7 +56,9 @@ def main():
         if event.type == pygame.KEYDOWN:
             player.move(event)
             if player.has_weapon:
-                player.weapon.move(event)
+                player.weapon.move(event, list_of_events, player)
+                player.weapon.attack_animation(event)
+
 
         pygame.display.flip()
 

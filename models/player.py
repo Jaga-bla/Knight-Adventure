@@ -16,12 +16,19 @@ class Player(SurfaceObject):
         self.rect = self.image.get_rect(center= (self.y, self.x))
         self.has_weapon = False
 
+    def left_hand(self):
+        position = (self.y-40, self.x -25)
+        return position
+    def right_hand(self):
+        position = (self.y+40, self.x -25)
+        return position
+
     def move(self, event):
         Movement_speed = 7
-        if event.key == pygame.K_LEFT and self.y>-80:
+        if event.key == pygame.K_LEFT and self.y>0:
             self.y -= Movement_speed
             self.rect = self.image.get_rect(center= (self.y, self.x))
-        if event.key == pygame.K_RIGHT and self.y<990:
+        if event.key == pygame.K_RIGHT and self.y<940:
             self.y += Movement_speed
             self.rect = self.image.get_rect(center= (self.y, self.x))
         if event.key == pygame.K_UP and self.x>10:
@@ -32,7 +39,8 @@ class Player(SurfaceObject):
             self.rect = self.image.get_rect(center= (self.y, self.x))
 
     def attack(self, target):
-        target.health = target.health - (self.offence + self.weapon.power)
+        if pygame.Rect.colliderect(self.weapon.rect, target.rect):
+            target.health = target.health - (self.offence + self.weapon.power)
 
     def is_alive(self):
         if self.health >0:
@@ -48,9 +56,10 @@ class Player(SurfaceObject):
         self.weapon.power = 0
 
     def init_weapon(self):
-        self.weapon = Weapon(self.y+40, self.x-25, self.screen, 'sword.png', (50,100))
+        position = self.right_hand()
+        self.weapon = Weapon(position[0], position[1], self.screen, 'sword.png', (50,100))
         self.weapon.starting_power()
-        self.offence = self.offence + self.weapon.power
+        self.offence = self.weapon.power
 
     def upgrade_weapon(self):
         self.offence = self.weapon.power

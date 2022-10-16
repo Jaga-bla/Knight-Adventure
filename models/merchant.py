@@ -29,8 +29,8 @@ class MerchantShop(DrawMenu):
         for option in self.list_of_options:
             if pygame.Rect.collidepoint(option, pygame.mouse.get_pos()):
                 if option == self.option_buy:
-                    player.gets_weapon()
                     player.init_weapon()
+                    player.gets_weapon()
                     player.weapon.starting_power()
                 if option == self.option_upgrade:
                     if player.has_weapon:
