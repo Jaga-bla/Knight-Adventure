@@ -3,6 +3,7 @@ from .__models_interfaces import SurfaceObject
 from .weapon import Weapon
 
 class Player(SurfaceObject): 
+    is_fighting = False
     def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
         self.screen = screen
         self.x = x

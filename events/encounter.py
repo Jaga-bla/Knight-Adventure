@@ -11,6 +11,7 @@ def encounter(fight, event, list_of_events):
         fight.blit_objects()
     elif fight.enemy.is_alive() == False:
         ready_to_fight = False
+        fight.player.is_fighting = False
         return ready_to_fight
     if pygame.Rect.colliderect(fight.player.rect, fight.enemy.rect):
         fight.enemy.attack(fight.player)
