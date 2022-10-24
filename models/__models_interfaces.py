@@ -13,6 +13,9 @@ class SurfaceObject:
     def blit_object(self):
         return self.screen.blit(self.image, (self.y, self.x))
 
+class MovableObject(SurfaceObject):
+    pass
+
 class DrawMenu:
     def create_option(self, vertical_position:int, text:str):
         option = pygame.draw.rect(self.screen, (0,0,0), (300,vertical_position, 300,60))

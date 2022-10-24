@@ -1,7 +1,7 @@
-from .__models_interfaces import SurfaceObject
+from .__models_interfaces import MovableObject
 import pygame
 
-class Enemy(SurfaceObject):
+class Enemy(MovableObject):
     def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
         self.screen = screen
         self.x = x

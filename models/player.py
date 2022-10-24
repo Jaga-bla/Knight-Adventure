@@ -1,8 +1,8 @@
 import pygame
-from .__models_interfaces import SurfaceObject
+from .__models_interfaces import MovableObject
 from .weapon import Weapon
 
-class Player(SurfaceObject): 
+class Player(MovableObject): 
     is_fighting = False
     def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
         self.screen = screen
