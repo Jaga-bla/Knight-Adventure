@@ -35,7 +35,7 @@ class ShopMenu(DrawMenu):
                         if player.has_weapon:
                             player.wallet -=5
                             player.weapon.upgrade_weapon(5)
-                            player.upgrade_weapon()
+                            player.change_power()
                         else:
                             self.__init__(self.screen, "You don't have a weapon")
                     else:

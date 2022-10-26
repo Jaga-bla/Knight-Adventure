@@ -21,7 +21,7 @@ class Fight:
         if self.enemy.is_alive() == False:
             if self.prize:
                 self.player.lvl +=1
-                self.player.wallet += random.randint(0,10)
+                self.player.wallet += random.randint(2,10)
                 self.prize = False
 
     def proceed(self, list_of_events):
