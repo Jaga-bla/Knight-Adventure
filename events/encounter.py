@@ -1,5 +1,4 @@
 import pygame
-import random
 
 def encounter(fight, event, list_of_events):
     if fight.enemy.is_alive():

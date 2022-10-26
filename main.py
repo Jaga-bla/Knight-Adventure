@@ -1,9 +1,10 @@
 import pygame
 import sys
-from models.background import *
-from models.merchant import *
-from models.player import *
-from models.fight import *
+from models.Background import *
+from models.Merchant import *
+from models.Player import *
+from models.Fight import *
+from models.FightEntrance import *
 from events.encounter import encounter
 
 
@@ -19,10 +20,11 @@ def main():
     player = Player(800,300, screen, 'player.png', (50,100))
     merchant = Merchant(900,400, screen, 'merchant.png', (50,100))
     fight_entrance = FightEntrance(0,0, screen, 'cave.png', (200,200))
+    inventory = InventoryView(screen, 'Inventory', player)
     ready_to_fight = False
 
     while 1:
-        inventory = InventoryView(screen, 'Inventory', player)
+        inventory.blit_menu()
         background.blit_object()
         merchant.blit_object()
         fight_entrance.blit_object()

@@ -1,21 +1,15 @@
 import pygame
-from .__models_interfaces import SurfaceObject
-from .weapon import Weapon
+from .__models_interfaces import MovableObject
+from .Weapon import Weapon
 
-class Player(SurfaceObject): 
+class Player(MovableObject): 
     is_fighting = False
     def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
-        self.screen = screen
-        self.x = x
-        self.y = y
-        self.size = size
-        self.offence = 0
+        super().__init__(y, x, screen, name_of_image, size)
+        self.power = 0
         self.wallet = 5
         self.health = 100
         self.lvl = 1
-        image1 = pygame.image.load(f"data/{name_of_image}")
-        self.image = pygame.transform.scale(image1, self.size)
-        self.rect = self.image.get_rect(center= (self.y, self.x))
         self.has_weapon = False
 
     def left_hand(self):
@@ -42,31 +36,28 @@ class Player(SurfaceObject):
 
     def attack(self, target):
         if pygame.Rect.colliderect(self.weapon.rect, target.rect):
-            target.health = target.health - (self.offence + self.weapon.power)
+            target.health = target.health - (self.power + self.weapon.power)
 
     def is_alive(self):
         if self.health >0:
             return True
 
-    def gets_weapon(self):
-        self.has_weapon = True
-
     def sells_weapon(self):
         self.has_weapon = False
-        pygame.image.load('data/mainmap.png')
-        self.offence = 0
+        self.power = 0
         self.weapon.power = 0
 
     def init_weapon(self):
+        self.has_weapon = True
         position = self.right_hand()
         self.weapon = Weapon(position[0], position[1], self.screen, 'sword.png', (50,100))
         self.weapon.starting_power()
-        self.offence = self.weapon.power
+        self.power = self.weapon.power
 
-    def upgrade_weapon(self):
-        self.offence = self.weapon.power
+    def change_power(self):
+        self.power = self.weapon.power
         print('weapon power', self.weapon.power)
-        print('player offence', self.offence)
+        print('player offence', self.power)
 
     def __str__(self):
         return self.name
