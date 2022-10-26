@@ -24,8 +24,9 @@ class ShopMenu(DrawMenu):
     def choose_option(self, player):
         for option in self.list_of_options:
             if pygame.Rect.collidepoint(option, pygame.mouse.get_pos()):
-                if option == self.option_buy:
+                if option == self.option_buy and player.has_weapon == False:
                     player.wallet -=5
+                    print(player.wallet)
                     player.init_weapon()
                     player.weapon.starting_power()
                     player.weapon.blit_object()

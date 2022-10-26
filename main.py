@@ -4,7 +4,8 @@ from models.Background import *
 from models.Merchant import *
 from models.Player import *
 from models.Fight import *
-from models.FightEntrance import FightEntrance
+from models.FightEntrance import *
+from events.encounter import encounter
 
 
 def main():
@@ -20,15 +21,14 @@ def main():
     merchant = Merchant(900,400, screen, 'merchant.png', (50,100))
     fight_entrance = FightEntrance(0,0, screen, 'cave.png', (200,200))
     inventory = InventoryView(screen, 'Inventory', player)
-    fight = Fight(player, screen)
     ready_to_fight = False
 
     while 1:
+        inventory.blit_menu()
         background.blit_object()
         merchant.blit_object()
         fight_entrance.blit_object()
         player.blit_object()
-        inventory.blit_menu()
         clock.tick(60)
         list_of_events = pygame.event.get()
 
@@ -37,25 +37,17 @@ def main():
                 sys.exit()
             if player.has_weapon:
                 player.weapon.attack_animation(event)
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    fight.player.attack(fight.enemy)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.Rect.colliderect(player.rect, merchant.rect) and player.is_fighting == False:
                     merchant.menu.choose_option(player)
                 if pygame.Rect.colliderect(player.rect, fight_entrance.rect) and player.is_fighting == False:
-                    fight_entrance.menu.choose_option()
-        
-        if fight.player.is_alive() and fight.enemy.is_alive():
-            fight.enemy.move(fight.player)
-        if fight.player.is_alive() and fight.enemy.is_alive():
-            fight.enemy.move(fight.player)
-        elif fight.enemy.is_alive() == False:
-            fight.grant_prize()
-            fight.player.is_fighting = False
-            return fight.player.is_fighting
-        if pygame.Rect.colliderect(fight.player.rect, fight.enemy.rect):
-            fight.enemy.attack(fight.player)
+                    ready_to_fight = fight_entrance.menu.choose_option()
+                    fight = Fight(player, screen)
+
+        if ready_to_fight == True:
+            player.is_fighting = True
+            encounter(fight, event, list_of_events)
+
         if player.has_weapon == True:
             player.weapon.blit_object()
         
@@ -69,9 +61,6 @@ def main():
             player.move(event)
             if player.has_weapon:
                 player.weapon.move(event, list_of_events, player)
-
-        # if fight.enemy.is_alive():
-        #     fight.blit_objects()
 
         pygame.display.flip()
 
