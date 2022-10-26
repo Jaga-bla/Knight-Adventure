@@ -14,7 +14,8 @@ class SurfaceObject:
         return self.screen.blit(self.image, (self.y, self.x))
 
 class MovableObject(SurfaceObject):
-    pass
+    def attack(self, target):
+        target.health = target.health - self.offence
 
 class DrawMenu:
     def create_option(self, vertical_position:int, text:str):
@@ -35,6 +36,4 @@ class DrawMenu:
         self.list_of_options = [self.option1]
 
     def choose_option(self):
-        for option in self.list_of_options:
-            if pygame.Rect.collidepoint(option, pygame.mouse.get_pos()):
-                pass
+        pass

@@ -1,7 +1,7 @@
 import pygame
 from .__models_interfaces import DrawMenu
 
-class MerchantShop(DrawMenu):
+class ShopMenu(DrawMenu):
     def create_option(self, vertical_position:int, text:str):
         option = pygame.draw.rect(self.screen, (0,0,0), (300,vertical_position, 300,60))
         font = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), text, True, (220,200,200))
@@ -27,8 +27,8 @@ class MerchantShop(DrawMenu):
                 if option == self.option_buy:
                     player.wallet -=5
                     player.init_weapon()
-                    player.gets_weapon()
                     player.weapon.starting_power()
+                    player.weapon.blit_object()
                 if option == self.option_upgrade:
                     if player.wallet >=5:
                         if player.has_weapon:
