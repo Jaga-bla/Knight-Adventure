@@ -1,5 +1,5 @@
 import pygame
-from .Enemy import Enemy
+from models.Enemy import Enemy
 import random
 
 class Fight:
@@ -17,6 +17,9 @@ class Fight:
         if self.enemy.is_alive:
             self.enemy.blit_object()
 
+    def init_enemy(self):
+        self.enemy = Enemy(800,400,self.screen,'enemy.png',(50,100))
+
     def grant_prize(self):
         if self.enemy.is_alive() == False:
             if self.prize:
@@ -24,14 +27,16 @@ class Fight:
                 self.player.wallet += random.randint(2,10)
                 self.prize = False
 
-    def proceed(self, list_of_events):
-        self.enemy.move(self.player)
+    def encounter(self, list_of_events):
         for event in list_of_events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.player.attack(self.enemy)
-        if self.enemy.is_alive() == False:
+        if self.player.is_alive() and self.enemy.is_alive():
+            self.enemy.move(self.player)
+        elif self.enemy.is_alive() == False:
             self.grant_prize()
+            self.player.is_fighting = False
+            return 
         if pygame.Rect.colliderect(self.player.rect, self.enemy.rect):
             self.enemy.attack(self.player)
-        self.blit_objects()

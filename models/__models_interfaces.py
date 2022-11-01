@@ -16,6 +16,9 @@ class SurfaceObject:
 class Character(SurfaceObject):
     def attack(self, target):
         target.health = target.health - self.power
+    
+    def move(self):
+        pass
 
     def is_alive(self):
         if self.health >0:
@@ -36,10 +39,6 @@ class DrawMenu:
         pygame.draw.rect(screen, (0,0,0), (50,50, 800,400))
         pygame.draw.rect(screen, (200,200,200), (70,70, 760,360))
         self.screen.blit(font,(300,120))
-
-        self.option1 = self.create_option(self, 250, 'Option1 text')
-
-        self.list_of_options = [self.option1]
 
     def choose_option(self):
         pass

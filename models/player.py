@@ -20,18 +20,19 @@ class Player(Character):
 
     def move(self, event):
         Movement_speed = 7
-        if event.key == pygame.K_LEFT and self.y>0:
-            self.y -= Movement_speed
-            self.rect = self.image.get_rect(center= (self.y, self.x))
-        if event.key == pygame.K_RIGHT and self.y<940:
-            self.y += Movement_speed
-            self.rect = self.image.get_rect(center= (self.y, self.x))
-        if event.key == pygame.K_UP and self.x>10:
-            self.x -= Movement_speed
-            self.rect = self.image.get_rect(center= (self.y, self.x))
-        if event.key == pygame.K_DOWN and self.x<500:
-            self.x += Movement_speed
-            self.rect = self.image.get_rect(center= (self.y, self.x))
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT and self.y>0:
+                self.y -= Movement_speed
+                self.rect = self.image.get_rect(center= (self.y, self.x))
+            if event.key == pygame.K_RIGHT and self.y<940:
+                self.y += Movement_speed
+                self.rect = self.image.get_rect(center= (self.y, self.x))
+            if event.key == pygame.K_UP and self.x>10:
+                self.x -= Movement_speed
+                self.rect = self.image.get_rect(center= (self.y, self.x))
+            if event.key == pygame.K_DOWN and self.x<500:
+                self.x += Movement_speed
+                self.rect = self.image.get_rect(center= (self.y, self.x))
 
     def attack(self, target):
         if pygame.Rect.colliderect(self.weapon.rect, target.rect):
