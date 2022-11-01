@@ -12,12 +12,12 @@ class Weapon(SurfaceObject):
         for event in list_of_events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    position = player.left_hand()
+                    position = player.weapon_position(-40)
                     self.y = position[0]
                     self.x = position[1]
                     self.in_right_hand = False
                 if event.key == pygame.K_RIGHT:
-                    position = player.right_hand()
+                    position = player.weapon_position(40)
                     self.y = position[0]
                     self.x = position[1]
                     self.in_right_hand = True

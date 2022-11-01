@@ -1,18 +1,12 @@
-from .__models_interfaces import MovableObject
+from .__models_interfaces import Character
 import pygame
 
-class Enemy(MovableObject):
-
-    def is_alive(self):
-        if self.health >0:
-            return True
-        else:
-            return False
+class Enemy(Character):
 
     def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
         super().__init__(y, x, screen, name_of_image, size)
         self.health = 100
-        self.offence = 1
+        self.power = 1
         self.is_alive()
         
     def move(self, player):

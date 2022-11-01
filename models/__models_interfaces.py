@@ -13,9 +13,15 @@ class SurfaceObject:
     def blit_object(self):
         return self.screen.blit(self.image, (self.y, self.x))
 
-class MovableObject(SurfaceObject):
+class Character(SurfaceObject):
     def attack(self, target):
-        target.health = target.health - self.offence
+        target.health = target.health - self.power
+
+    def is_alive(self):
+        if self.health >0:
+            return True
+        else:
+            return False
 
 class DrawMenu:
     def create_option(self, vertical_position:int, text:str):

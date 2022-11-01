@@ -1,9 +1,11 @@
 import pygame
-from .__models_interfaces import MovableObject
+from .__models_interfaces import Character
 from .Weapon import Weapon
 
-class Player(MovableObject): 
+class Player(Character): 
+
     is_fighting = False
+
     def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
         super().__init__(y, x, screen, name_of_image, size)
         self.power = 0
@@ -12,11 +14,8 @@ class Player(MovableObject):
         self.lvl = 1
         self.has_weapon = False
 
-    def left_hand(self):
-        position = (self.y-40, self.x -25)
-        return position
-    def right_hand(self):
-        position = (self.y+40, self.x -25)
+    def weapon_position(self, vertical_position:int):
+        position = (self.y+vertical_position, self.x -25)
         return position
 
     def move(self, event):
@@ -38,10 +37,6 @@ class Player(MovableObject):
         if pygame.Rect.colliderect(self.weapon.rect, target.rect):
             target.health = target.health - (self.power + self.weapon.power)
 
-    def is_alive(self):
-        if self.health >0:
-            return True
-
     def sells_weapon(self):
         self.has_weapon = False
         self.power = 0
@@ -49,15 +44,10 @@ class Player(MovableObject):
 
     def init_weapon(self):
         self.has_weapon = True
-        position = self.right_hand()
+        position = self.weapon_position(40)
         self.weapon = Weapon(position[0], position[1], self.screen, 'sword.png', (50,100))
         self.weapon.starting_power()
         self.power = self.weapon.power
 
     def change_power(self):
         self.power = self.weapon.power
-        print('weapon power', self.weapon.power)
-        print('player offence', self.power)
-
-    def __str__(self):
-        return self.name
