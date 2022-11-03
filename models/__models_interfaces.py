@@ -34,7 +34,7 @@ class DrawMenu:
     def create_option(self, vertical_position:int, text:str):
         option = pygame.draw.rect(self.screen, (0,0,0), (300,vertical_position, 300,60))
         font = pygame.font.Font.render(pygame.font.SysFont("Dyuthi", 24), text, True, (220,200,200))
-        self.screen.blit(font,(400,vertical_position+20))
+        self.screen.blit(font,(350,vertical_position+20))
         return option
 
     def __init__(self, screen:pygame.Surface, heading:str):
