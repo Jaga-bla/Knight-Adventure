@@ -26,8 +26,10 @@ class Weapon(SurfaceObject):
     def starting_power(self):
         self.power = 5
         return self.power
+        
     def upgrade_weapon(self, power_added):
         self.power = self.power + power_added
+
     def attack_animation(self, list_of_events):
         image_attack = pygame.image.load("data/sword_attack.png")
         image_attack = pygame.transform.scale(image_attack, (100,50))

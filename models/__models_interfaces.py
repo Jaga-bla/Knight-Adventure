@@ -14,6 +14,10 @@ class SurfaceObject:
         return self.screen.blit(self.image, (self.y, self.x))
 
 class Character(SurfaceObject):
+    def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
+        super().__init__(y, x, screen, name_of_image, size)
+        self.lvl = 1
+
     def attack(self, target):
         target.health = target.health - self.power
     

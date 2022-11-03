@@ -8,7 +8,7 @@ class Fight:
         self.screen = screen
         image = pygame.image.load("data/fight_background.png")
         self.background = pygame.transform.scale(image, (1000, 600))
-        self.enemy = Enemy(800,400,self.screen,'enemy.png',(50,100))
+        self.enemy = Enemy(800,400,self.screen,'enemy.png',(50,100), self.player.lvl)
         self.prize = True
 
     def blit_objects(self):
@@ -18,13 +18,13 @@ class Fight:
             self.enemy.blit_object()
 
     def init_enemy(self):
-        self.enemy = Enemy(800,400,self.screen,'enemy.png',(50,100))
+        self.enemy = Enemy(800,400,self.screen,'enemy.png',(50,100), self.player.lvl)
 
     def grant_prize(self):
         if self.enemy.is_alive() == False:
             if self.prize:
                 self.player.lvl +=1
-                self.player.wallet += random.randint(2,10)
+                self.player.wallet += random.randint(2+self.player.lvl,10+self.player.lvl)
                 self.prize = False
 
     def encounter(self, list_of_events):

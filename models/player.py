@@ -11,7 +11,6 @@ class Player(Character):
         self.power = 0
         self.wallet = 5
         self.health = 100
-        self.lvl = 1
         self.has_weapon = False
 
     def weapon_position(self, vertical_position:int):

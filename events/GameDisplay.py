@@ -1,3 +1,4 @@
+import sys
 from models.Background import *
 from models.Merchant import *
 from models.Player import *
@@ -7,7 +8,7 @@ from models.FightEntrance import *
 
 class GameDisplay:
     def __init__(self, screen):
-        #initialize screen objects
+        self.screen = screen
         self.background = Background(0,0,screen,'mainmap.png',(1000,600))
         self.player = Player(800,300, screen, 'player.png', (50,100))
         self.merchant = Merchant(900,400, screen, 'merchant.png', (50,100))
@@ -37,6 +38,8 @@ class GameDisplay:
             self.player.weapon.blit_object()
 
     def run_game(self, event, list_of_events):
+        if self.player.is_alive() == False:
+            sys.exit()
         self.player.move(event)
         if self.player.has_weapon:
             self.player.weapon.move(event, self.player)
@@ -49,7 +52,7 @@ class GameDisplay:
                         self.merchant.menu.choose_option(self.player)
                     if pygame.Rect.colliderect(self.player.rect, self.fight_entrance.rect):
                         self.player.is_fighting = self.fight_entrance.menu.choose_option()
-                        self.fight.init_enemy()               
+                        self.fight = Fight(self.player, self.screen)               
         if self.player.is_fighting == True:
             self.fight.encounter(list_of_events)
             self.fight_map()

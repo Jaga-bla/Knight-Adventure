@@ -3,10 +3,10 @@ import pygame
 
 class Enemy(Character):
 
-    def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple):
+    def __init__(self, y : int, x :int, screen:pygame.Surface, name_of_image: str, size : tuple, factor):
         super().__init__(y, x, screen, name_of_image, size)
-        self.health = 100
-        self.power = 1
+        self.health = 50 + 10*factor**2
+        self.power = 1 + factor**2
         self.is_alive()
         
     def move(self, player):
